@@ -74,8 +74,6 @@ class ContactHelper:
         Select(wd.find_element_by_name("aday")).select_by_visible_text(contact_properties.aday)
         wd.find_element_by_name("amonth").click()
         Select(wd.find_element_by_name("amonth")).select_by_visible_text(contact_properties.amonth)
-        wd.find_element_by_xpath("//div[@id='content']/form/select[4]/option[12]").click()
-        wd.find_element_by_xpath("//div[@id='content']/form/input[20]").click()
 
     def modify_first_contact(self, contact_properties):
         wd = self.app.wd
