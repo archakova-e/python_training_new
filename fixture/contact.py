@@ -9,6 +9,10 @@ class ContactHelper:
         wd = self.app.wd
         wd.find_element_by_link_text("add new").click()
 
+    def open_contact_page(self):
+        wd = self.app.wd
+        wd.find_element_by_link_text("home").click()
+
     def fill_contact_properties(self, contact_properties):
         wd = self.app.wd
         self.open_add_page()
@@ -64,13 +68,10 @@ class ContactHelper:
         # fill contact birthday
         wd.find_element_by_name("bday").click()
         Select(wd.find_element_by_name("bday")).select_by_visible_text(contact_properties.bday)
-        wd.find_element_by_xpath("//option[@value='10']").click()
         wd.find_element_by_name("bmonth").click()
         Select(wd.find_element_by_name("bmonth")).select_by_visible_text(contact_properties.bmonth)
-        wd.find_element_by_xpath("//option[@value='November']").click()
         wd.find_element_by_name("aday").click()
         Select(wd.find_element_by_name("aday")).select_by_visible_text(contact_properties.aday)
-        wd.find_element_by_xpath("//div[@id='content']/form/select[3]/option[12]").click()
         wd.find_element_by_name("amonth").click()
         Select(wd.find_element_by_name("amonth")).select_by_visible_text(contact_properties.amonth)
         wd.find_element_by_xpath("//div[@id='content']/form/select[4]/option[12]").click()
@@ -78,6 +79,7 @@ class ContactHelper:
 
     def modify_first_contact(self, contact_properties):
         wd = self.app.wd
+        self.open_contact_page()
         # modify contact names
         wd.find_element_by_xpath("//img[@alt='Edit']").click()
         wd.find_element_by_name("firstname").click()
@@ -131,21 +133,18 @@ class ContactHelper:
         # modify contact birthday
         wd.find_element_by_name("bday").click()
         Select(wd.find_element_by_name("bday")).select_by_visible_text(contact_properties.bday)
-        wd.find_element_by_xpath("//option[@value='15']").click()
         wd.find_element_by_name("bmonth").click()
         Select(wd.find_element_by_name("bmonth")).select_by_visible_text(contact_properties.bmonth)
-        wd.find_element_by_xpath("//option[@value='December']").click()
         wd.find_element_by_name("aday").click()
         Select(wd.find_element_by_name("aday")).select_by_visible_text(contact_properties.bday)
-        wd.find_element_by_xpath("//option[@value='15']").click()
         wd.find_element_by_name("amonth").click()
         Select(wd.find_element_by_name("amonth")).select_by_visible_text(contact_properties.bmonth)
-        wd.find_element_by_xpath("//option[@value='December']").click()
         # submit modification
         wd.find_element_by_name("update").click()
 
     def delete_first_contact(self):
         wd = self.app.wd
+        self.open_contact_page()
         # select first contact
         wd.find_element_by_name("selected[]").click()
         # select update
