@@ -1,13 +1,7 @@
 from model.group import Group
 
 
-def test_modify_group_name(app):
-    app.group.modify_first_group(Group(name="new_name"))
-
-
-def test_modify_group_header(app):
-    app.group.modify_first_group(Group(header="new_header"))
-
-
-def test_modify_group_footer(app):
-    app.group.modify_first_group(Group(footer="new_footer"))
+def test_modify_first_group(app):
+    app.session.login(username="Admin", password="secret")
+    app.group.modify_first_group(Group(name="qqq", header="www", footer="eee"))
+    app.session.logout()
