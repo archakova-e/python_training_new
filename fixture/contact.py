@@ -30,26 +30,21 @@ class ContactHelper:
 
     def fill_contact_form(self, contact_properties):
         wd = self.app.wd
-        # fill contact names
         self.change_field_value("firstname", contact_properties.firstname)
         self.change_field_value("middlename", contact_properties.middlename)
         self.change_field_value("lastname", contact_properties.lastname)
         self.change_field_value("nickname", contact_properties.nickname)
-        # fill contact location
         self.change_field_value("title", contact_properties.title)
         self.change_field_value("company", contact_properties.company)
         self.change_field_value("address", contact_properties.address)
-        # fill contact phones
         self.change_field_value("home", contact_properties.home_phone)
         self.change_field_value("mobile", contact_properties.mobile_phone)
         self.change_field_value("work", contact_properties.work_phone)
         self.change_field_value("fax", contact_properties.fax)
-        # fill contact emails and homepage
         self.change_field_value("email", contact_properties.email)
         self.change_field_value("email2", contact_properties.email2)
         self.change_field_value("email3", contact_properties.email3)
         self.change_field_value("homepage", contact_properties.homepage)
-        # fill contact birthday
         self.change_field_value_calendary("bday", contact_properties.bday)
         self.change_field_value_calendary("bmonth", contact_properties.bmonth)
         self.change_field_value_calendary("aday", contact_properties.aday)
