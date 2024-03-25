@@ -71,30 +71,36 @@ class ContactHelper:
     def add_new_contact(self, contact_properties):
         self.open_add_contact_page()
         self.fill_contact_form(contact_properties)
+        self.contact_cache = None
 
     def modify_first_contact(self, new_contact_data):
         self.open_contact_page()
         self.edit_contact()
         self.fill_contact_form(new_contact_data)
         self.submit_modification()
+        self.contact_cache = None
 
     def delete_first_contact(self):
         self.open_contact_page()
         self.select_first_contact()
         self.delete_button()
+        self.contact_cache = None
 
     def count(self):
         wd = self.app.wd
         self.open_contact_page()
         return len(wd.find_elements_by_name("selected[]"))
 
+    contact_cache = None
+
     def get_contact_list(self):
-        wd = self.app.wd
-        self.open_contact_page()
-        contacts = []
-        for i, element in enumerate(wd.find_elements_by_css_selector("#maintable tr td:first-child")):
-            text1 = wd.find_elements_by_css_selector("#maintable tr")[i+1].find_elements_by_css_selector("td")[1].text
-            text2 = wd.find_elements_by_css_selector("#maintable tr")[i+1].find_elements_by_css_selector("td")[2].text
-            id = element.find_element_by_name("selected[]").get_attribute("value")
-            contacts.append(ContactProperties(lastname=text1, firstname=text2,  id=id))
-        return contacts
+        if self.contact_cache is None:
+            wd = self.app.wd
+            self.open_contact_page()
+            self.contact_cache = []
+            for i, element in enumerate(wd.find_elements_by_css_selector("#maintable tr td:first-child")):
+                text1 = wd.find_elements_by_css_selector("#maintable tr")[i+1].find_elements_by_css_selector("td")[1].text
+                text2 = wd.find_elements_by_css_selector("#maintable tr")[i+1].find_elements_by_css_selector("td")[2].text
+                id = element.find_element_by_name("selected[]").get_attribute("value")
+                self.contact_cache.append(ContactProperties(lastname=text1, firstname=text2,  id=id))
+        return list(self.contact_cache)
